@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\tipo;
+use App\animal;
 class animalcontroller extends Controller
 {
     /**
@@ -13,19 +14,11 @@ class animalcontroller extends Controller
      */
     public function index()
     {
-        //
+        $animal= animal::all();
+        return response()->json(['animal'=>$animal, 'code'=>'200']) ;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +27,24 @@ class animalcontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+       if(empty($request->nombre) || empty($request->edad)|| empty($request->tipoanimalid)) {
+
+            return response()->json(['message'=>'Todos los campos son reueridos', 'code'=>'406']);
+        }
+        $tipo=tipo::find($request->tipoanimalid);
+        if((empty($tipo))){
+        return response()->json(['message'=>'nivel no encontrado', 'code'=>'404']) ;
+       }
+
+        $tipo = new animal();
+        $tipo->nombre=$request->nombre;
+        $tipo->edad=$request->edad;
+        $tipo->tipoanimalid=$request->tipoanimalid;
+        $tipo->save();
+        return response()->json(['message'=>'Datos creado correctamente', 'code'=>'201']);
+
+    }
     }
 
     /**
@@ -45,19 +55,15 @@ class animalcontroller extends Controller
      */
     public function show($id)
     {
-        //
+        $animal= animal::find($id);
+       if((empty($animal))){
+        return response()->json(['message'=>'Animal no encontrado', 'code'=>'404']) ;
+       }
+
+       return response()->json(['animal'=>$animal, 'code'=>'200']) ;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +74,26 @@ class animalcontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(empty($request->nombre) || empty($request->edad)|| empty($request->tipoanimalid)) {
+
+            return response()->json(['message'=>'Todos los campos son requeridos', 'code'=>'406']);
+        }
+            $tipo=tipo::find($request->tipoanimalid);
+            if((empty($tipo))){
+            return response()->json(['message'=>'nivel no encontrado', 'code'=>'404']) ;
+           }
+
+        $animal=animal::find($id);
+        if(empty($animal)){
+
+                return response()->json(['message'=>'Producto no encontrado', 'code'=>'404']);
+        }
+        
+        $animal->nombre=$request->nombre;
+        $animal->edad=$request->edad;
+        $animal->tipoanimalid=$request->tipoanimalid;
+        $animal->save();
+        return response()->json(['message'=>'Animal actualizado', 'code'=>'200']);
     }
 
     /**
@@ -79,6 +104,20 @@ class animalcontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(empty($id)) {
+
+            return response()->json(['message'=>'el id es obligatorio', 'code'=>'406']);
+        }
+
+
+        $animal=animal::find($id);
+        if(empty($animal)){
+
+                return response()->json(['message'=>'Animal no encontrado', 'code'=>'404']);
+        }
+        
+        $animal->delete();
+
+        return response()->json(['message'=>'animal borrado', 'code'=>'200']);
     }
 }
