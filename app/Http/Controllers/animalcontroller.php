@@ -7,11 +7,19 @@ use App\tipo;
 use App\animal;
 class animalcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
+/**
+ * @SWG\Get(
+ *   path="/animal",
+ *   summary="Obtener animales",
+   *   tags={"Animales"},
+ *   operationId="getCustomerRates",
+ *   @SWG\Response(response=200, description="successful operation"),
+ *   @SWG\Response(response=406, description="not acceptable"),
+ *   @SWG\Response(response=500, description="internal server error")
+ * )
+ *
+ */
     public function index()
     {
         $animal= animal::all();
@@ -20,10 +28,36 @@ class animalcontroller extends Controller
 
     
     /**
-     * Store a newly created resource in storage.
+     * @SWG\Post(
+     *   path="/animal",
+     *   tags={"Animales"},
+     *   summary="Ingresar animal",
+     *   operationId="getCustomerRates2",
+     *   @SWG\Parameter(
+     *     name="nombre",
+     *     in="formData",
+     *     description="Ingrese nombre",
+     *     required=true,
+     *     type="string"
+     *   ),
+      @SWG\Parameter(
+     *     name="edad",
+     *     in="formData",
+     *     description="Ingrese edad",
+     *     required=true,
+     *     type="string"
+     *   ),
+      @SWG\Parameter(
+     *     name="tipoanimalid",
+     *     in="formData",
+     *     description="Ingrese Tipo de animal",
+     *     required=true,
+     *     type="string"
+     *   ),
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=404, description="not found"),)
+     * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -47,11 +81,24 @@ class animalcontroller extends Controller
     }
     }
 
-    /**
-     * Display the specified resource.
+   /**
+     * @SWG\Get(
+     *   path="/animal/{id}",
+     *   tags={"Animales"},
+     *   summary="Obtener animal",
+     *   operationId="getanimal",
+     *   @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Ingresar id del animal",
+     *     required=true,
+     *     type="integer"
+     *   ),
+     *   @SWG\Response(response=200, description="Datos obtenidos correctamente"),
+     *   @SWG\Response(response=404, description="El id del animal existe"),
+     *   @SWG\Response(response=422, description="No se permiten valores nulos"),
+     * )
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -63,15 +110,49 @@ class animalcontroller extends Controller
        return response()->json(['animal'=>$animal, 'code'=>'200']) ;
     }
 
-    
 
     /**
-     * Update the specified resource in storage.
+     * @SWG\Put(
+     *   path="/animal/{id}",
+     *   tags={"Animales"},
+     *   summary="Actualizar animales",
+     *   operationId="sharedRed",
+     *   @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Ingresar id del animal",
+     *     required=true,
+     *     type="integer"
+     ),
+     *   @SWG\Parameter(
+     *     name="nombre",
+     *     in="formData",
+     *     description="Ingrese nombre",
+     *     required=true,
+     *     type="string"
+     *   ),
+      @SWG\Parameter(
+     *     name="edad",
+     *     in="formData",
+     *     description="Ingrese edad",
+     *     required=true,
+     *     type="string"
+     *   ),
+      @SWG\Parameter(
+     *     name="tipoanimalid",
+     *     in="formData",
+     *     description="Ingrese Tipo de animal",
+     *     required=true,
+     *     type="string"
+     *   ),
+
+     *   @SWG\Response(response=200, description="datos obtenidos correctamente"),
+     *   @SWG\Response(response=404, description="usuario no encontrado"),
+     *   @SWG\Response(response=422, description="no se permiten valores nulos"),
+     * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         if(empty($request->nombre) || empty($request->edad)|| empty($request->tipoanimalid)) {
@@ -96,11 +177,23 @@ class animalcontroller extends Controller
         return response()->json(['message'=>'Animal actualizado', 'code'=>'200']);
     }
 
-    /**
-     * Remove the specified resource from storage.
+     /**
+    * @SWG\Delete(
+     *   path="/animal/{id}",
+     *   tags={"Animales"},
+     *   summary="Eliminar animal",
+     *   operationId="deleteanimal",
+     *   @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Ingresar el id del animal",
+     *     required=true,
+     *     type="integer"
+     *   ),
+     *   @SWG\Response(response=204, description="Animal eliminado correctamente"),
+     *   @SWG\Response(response=404, description="Animal no encontrado"),
+     * )
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

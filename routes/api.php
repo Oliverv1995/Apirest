@@ -19,6 +19,6 @@ Route::get('/user', function (Request $request) {
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-Route::resource('/v0/tipo','tipoanimalcontroller');
-Route::resource('/v1/animal','animalcontroller');
+//Route::resource('v0/tipodeanimal/{id}','tipoanimalcontroller');
+Route::resource('v0/tipo','tipoanimalcontroller');
+Route::resource('v0/animal','animalcontroller');

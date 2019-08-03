@@ -1,0 +1,301 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Oliver API",
+        "version": "1.0.0"
+    },
+    "basePath": "/api/v0",
+    "paths": {
+        "/animal": {
+            "get": {
+                "tags": [
+                    "Animales"
+                ],
+                "summary": "Obtener animales",
+                "operationId": "getCustomerRates",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Animales"
+                ],
+                "summary": "Ingresar animal",
+                "operationId": "getCustomerRates2",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Ingrese nombre",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "edad",
+                        "in": "formData",
+                        "description": "Ingrese edad",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tipoanimalid",
+                        "in": "formData",
+                        "description": "Ingrese Tipo de animal",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/animal/{id}": {
+            "get": {
+                "tags": [
+                    "Animales"
+                ],
+                "summary": "Obtener animal",
+                "operationId": "getanimal",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar id del animal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos obtenidos correctamente"
+                    },
+                    "404": {
+                        "description": "El id del animal existe"
+                    },
+                    "422": {
+                        "description": "No se permiten valores nulos"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Animales"
+                ],
+                "summary": "Actualizar animales",
+                "operationId": "sharedRed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar id del animal",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "formData",
+                        "description": "Ingrese nombre",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "edad",
+                        "in": "formData",
+                        "description": "Ingrese edad",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tipoanimalid",
+                        "in": "formData",
+                        "description": "Ingrese Tipo de animal",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "datos obtenidos correctamente"
+                    },
+                    "404": {
+                        "description": "usuario no encontrado"
+                    },
+                    "422": {
+                        "description": "no se permiten valores nulos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Animales"
+                ],
+                "summary": "Eliminar animal",
+                "operationId": "deleteanimal",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar el id del animal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Animal eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "Animal no encontrado"
+                    }
+                }
+            }
+        },
+        "/tipo": {
+            "get": {
+                "tags": [
+                    "Tipos de animales"
+                ],
+                "summary": "Animales",
+                "operationId": "getCustomerRates",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tipos de animales"
+                ],
+                "summary": "Ingresar Tipo de animal",
+                "operationId": "getCustomerRates",
+                "parameters": [
+                    {
+                        "name": "descripcion",
+                        "in": "formData",
+                        "description": "Ingrese tipo de animal",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/tipo/{id}": {
+            "get": {
+                "tags": [
+                    "Tipos de animales"
+                ],
+                "summary": "Obtener tipo",
+                "operationId": "gettipo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar id del tipo de animal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos obtenidos correctamente"
+                    },
+                    "404": {
+                        "description": "El id del tipo existe"
+                    },
+                    "422": {
+                        "description": "No se permiten valores nulos"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Tipos de animales"
+                ],
+                "summary": "Actualizar tipo de animales",
+                "operationId": "sharedRed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar id del tipo de animal",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "formData",
+                        "description": "Ingresar nuevo tipo de animal",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "datos obtenidos correctamente"
+                    },
+                    "404": {
+                        "description": "usuario no encontrado"
+                    },
+                    "422": {
+                        "description": "no se permiten valores nulos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tipos de animales"
+                ],
+                "summary": "Eliminar tipo de animal",
+                "operationId": "deletetipo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ingresar el id tipo de animal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Tipo eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "Tipo no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
